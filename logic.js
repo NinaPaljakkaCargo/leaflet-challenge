@@ -18,12 +18,13 @@ function createFeatures(data) {
     };
 
     function chooseColor(depth){
-        return depth > 50 ? '#006400' :
-        depth > 30 ? '#008000' :
-        depth > 10 ? '#6B8E23' :
-        depth > 5 ? '#9ACD32' :
-        depth < 5 ? '#90EE90':
-                '#F5FFFA';
+        return depth > 90 ? '#191970' :
+        depth > 70 ? '#4169E1' :
+        depth > 50 ? '#0000FF' :
+        depth > 30 ? '#1E90FF' :
+        depth > 10 ? '#00BFFF':
+        depth < 10 ? '#48D1CC' :
+                '#B0E0E6';
     }
 
     var earthquakes = L.geoJSON(data, {
@@ -39,6 +40,9 @@ function createFeatures(data) {
             });
         }
     });
+
+    
+    
 
 
     // Sending earthquakes layer to the createMap function
@@ -58,6 +62,22 @@ function createMap(earthquakes) {
         accessToken: API_KEY
     });
 
+    //var legend = L.control({position: 'bottomright'});
+    //legend.onAdd = function (map) {
+      //  var div = L.DomUtil.create('div', 'info legend'),
+        //    grades = [-10, 10, 30, 50, 70, 90],
+          //  labels = [];
+    
+  //      for (var i = 0; i < grades.length; i++) {
+    //        div.innerHTML +=
+      //          '<i style="background:' + chooseColor(grades[i] + 1) + '"></i> ' +
+       //         grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+        //}
+    
+        //return div;
+    //};
+    
+    //legend.addTo(myMap);
 
 
     var baseMaps = {
