@@ -17,24 +17,35 @@ function createFeatures(data) {
             "</h3><hr><p>" + 'Magnitude: ' + feature.properties.mag + "<hr>" + 'Depth: ' + new Number(feature.geometry.coordinates[2]) + "</p>");
     };
 
+    function chooseColor(depth){
+        return depth > 50 ? '#006400' :
+        depth > 30 ? '#008000' :
+        depth > 10 ? '#6B8E23' :
+        depth > 5 ? '#9ACD32' :
+        depth < 5 ? '#90EE90':
+                '#F5FFFA';
+    }
+
     var earthquakes = L.geoJSON(data, {
         onEachFeature: onEachFeature,
-        layer: function (feature, latlng) {
-            var markers = {
-                radius: 4*feature.properties.mag,
-                fillColor: color,
-                color: "green",
+        pointToLayer: function (feature, latlng) {
+            return L.circleMarker(latlng, {
+                radius: feature.properties.mag*3,
+                fillColor: chooseColor(feature.geometry.coordinates[2]),
+                color: "#000",
                 weight: 1,
                 opacity: 1,
                 fillOpacity: 0.8
-                };
-            return L.circleMarker(latlng, geojsonMarkerOptions);
-            }
+            });
+        }
     });
+
 
     // Sending earthquakes layer to the createMap function
     createMap(earthquakes);
 };
+
+
 
 function createMap(earthquakes) {
 
@@ -47,12 +58,14 @@ function createMap(earthquakes) {
         accessToken: API_KEY
     });
 
+
+
     var baseMaps = {
         "Street Map": streetmap,
     };
 
     var overlayMaps = {
-        Earthquakes: earthquakes
+        "Earthquakes": earthquakes
     };
 
     var myMap = L.map("map", {
@@ -60,10 +73,14 @@ function createMap(earthquakes) {
             0,0
         ],
         zoom: 5,
-        layers: [streetmap, earthquakes]
+        layers: [streetmap, earthquakes]   
     });
 
 
+
+
+
+    //Notes: MapBox is used for visualization. 
 
     //data markers should reflect the magnitude of the earthquake by their size and and depth of the earth quake
     //by color. Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should 
@@ -71,18 +88,11 @@ function createMap(earthquakes) {
 
 
     //DEPTH: geometry->coordinates[2]-> depth
-
-    //var d = 
-
     //MAGNITUDE: properties->mag
 
 
 
 };
-
-
-
-
 
 
 window.addEventListener('DOMContentLoaded', init);
