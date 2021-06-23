@@ -1,7 +1,7 @@
 //getting data from JSON URL
 function init() {
     // Store JSON URL in variable
-    var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_week.geojson";
+    var url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson";
 
     //get data from the url using d3.json
     d3.json(url, function (data) {
@@ -13,8 +13,8 @@ function init() {
 function createFeatures(data) {
 
     function onEachFeature(feature, layer) {
-        layer.bindPopup("<h3>" + feature.properties.mag +
-            "</h3><hr><p>" + new Number(feature.geometry.coordinates[2]) + "</p>");
+        layer.bindPopup("<h3>" + 'Location: ' + feature.properties.title + 
+            "</h3><hr><p>" + 'Magnitude: ' + feature.properties.mag + "<hr>" + 'Depth: ' + new Number(feature.geometry.coordinates[2]) + "</p>");
     };
 
     var earthquakes = L.geoJSON(data, {
@@ -69,18 +69,7 @@ function createMap(earthquakes) {
     //by color. Earthquakes with higher magnitudes should appear larger and earthquakes with greater depth should 
     //appear darker in color.
 
-    // Create a circle and pass in some initial options
-    L.circle([45.52, -122.69], {
-    color: "green",
-    fillColor: "green",
-    fillOpacity: 0.75,
-    radius: 500
-    }).addTo(myMap);
 
-
-
-
-    //the array. . .
     //DEPTH: geometry->coordinates[2]-> depth
 
     //var d = 
