@@ -18,14 +18,15 @@ function createFeatures(data) {
     };
 
     function chooseColor(depth){
-        return depth > 90 ? '#4169E1' :
-        depth > 70 ?  '#191970' :
-        depth > 50 ? '#0000FF' :
-        depth > 30 ? '#1E90FF' :
-        depth >= 10 ? '#00BFFF':
-        depth < 10 ? '#48D1CC' :
-                '#B0E0E6';
+        return depth > 90 ? '#003300' :
+        depth > 70 ?  '#2F713D' :
+        depth > 50 ? '#3E9550' :
+        depth > 30 ? '#50B665' :
+        depth >= 10 ? '#81E481':
+        depth < 10 ? '#ABEDAB' :
+                '#D5F6D5';
     }
+
 
     var earthquakes = L.geoJSON(data, {
         onEachFeature: onEachFeature,
@@ -88,14 +89,16 @@ function createMap(earthquakes) {
         from, to;
 
         function chooseColor(grades){
-            return grades > 90 ? '#4169E1' :
-            grades > 70 ?  '#191970' :
-            grades > 50 ? '#0000FF' :
-            grades > 30 ? '#1E90FF' :
-            grades >= 10 ? '#00BFFF':
-            grades < 10 ? '#48D1CC' :
-                    '#B0E0E6';
+            return grades > 90 ? '#003300' :
+            grades > 70 ?  '#2F713D' :
+            grades > 50 ? '#3E9550' :
+            grades > 30 ? '#50B665' :
+            grades >= 10 ? '#81E481':
+            grades < 10 ? '#ABEDAB' :
+                    '#D5F6D5';
         }
+
+
 
         for (var i =0; i< grades.length; i++) {
             from = grades[i];
