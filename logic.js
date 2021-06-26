@@ -42,8 +42,6 @@ function createFeatures(data) {
     });
 
     
-    
-
 
     // Sending earthquakes layer to the createMap function
     createMap(earthquakes);
@@ -62,23 +60,6 @@ function createMap(earthquakes) {
         accessToken: API_KEY
     });
 
-    //var legend = L.control({position: 'bottomright'});
-    //legend.onAdd = function (map) {
-      //  var div = L.DomUtil.create('div', 'info legend'),
-        //    grades = [-10, 10, 30, 50, 70, 90],
-          //  labels = [];
-    
-  //      for (var i = 0; i < grades.length; i++) {
-    //        div.innerHTML +=
-      //          '<i style="background:' + chooseColor(grades[i] + 1) + '"></i> ' +
-       //         grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
-        //}
-    
-        //return div;
-    //};
-    
-    //legend.addTo(myMap);
-
 
     var baseMaps = {
         "Street Map": streetmap,
@@ -95,6 +76,43 @@ function createMap(earthquakes) {
         zoom: 5,
         layers: [streetmap, earthquakes]   
     });
+
+
+    var legend = L.control({
+        position: 'bottomright'});
+
+    legend.onAdd = function(myMap) {
+        var div = L.DomUtil.create('div', 'info legend'),
+        grades=[0,10,30,50,70,90],
+        labels=[],
+        from, to;
+
+        function chooseColor(grades){
+            return grades > 90 ? '#191970' :
+            grades > 70 ? '#4169E1' :
+            grades > 50 ? '#0000FF' :
+            grades > 30 ? '#1E90FF' :
+            grades >= 10 ? '#00BFFF':
+            grades < 10 ? '#48D1CC' :
+                    '#B0E0E6';
+        }
+
+        for (var i =0; i< grades.length; i++) {
+            from = grades[i];
+            to = grades[i+1];
+
+            labels.push(
+                '< i style="background:' + chooseColor(from) + '"></i> ' +
+                from + (to ? '&ndash;' + to : '+'));
+        }
+        div.innerHTML = labels.join('<br>');
+
+        return div;
+
+    };
+    legend.addTo(myMap);
+
+    
 
 
 
