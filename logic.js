@@ -18,8 +18,8 @@ function createFeatures(data) {
     };
 
     function chooseColor(depth){
-        return depth > 90 ? '#191970' :
-        depth > 70 ? '#4169E1' :
+        return depth > 90 ? '#4169E1' :
+        depth > 70 ?  '#191970' :
         depth > 50 ? '#0000FF' :
         depth > 30 ? '#1E90FF' :
         depth >= 10 ? '#00BFFF':
@@ -88,8 +88,8 @@ function createMap(earthquakes) {
         from, to;
 
         function chooseColor(grades){
-            return grades > 90 ? '#191970' :
-            grades > 70 ? '#4169E1' :
+            return grades > 90 ? '#4169E1' :
+            grades > 70 ?  '#191970' :
             grades > 50 ? '#0000FF' :
             grades > 30 ? '#1E90FF' :
             grades >= 10 ? '#00BFFF':
@@ -102,7 +102,7 @@ function createMap(earthquakes) {
             to = grades[i+1];
 
             labels.push(
-                '< i style="background:' + chooseColor(from) + '"></i> ' +
+                '<i style="background:' + chooseColor(from) + '">[color]</i> ' +
                 from + (to ? '&ndash;' + to : '+'));
         }
         div.innerHTML = labels.join('<br>');
