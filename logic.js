@@ -22,7 +22,7 @@ function createFeatures(data) {
         depth > 70 ? '#4169E1' :
         depth > 50 ? '#0000FF' :
         depth > 30 ? '#1E90FF' :
-        depth > 10 ? '#00BFFF':
+        depth >= 10 ? '#00BFFF':
         depth < 10 ? '#48D1CC' :
                 '#B0E0E6';
     }
